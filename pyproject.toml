@@ -1,0 +1,30 @@
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+select = [
+    # Pyflakes
+    "F",
+    # Pycodestyle
+    "E",
+    "W",
+    # isort
+    "I",
+    # pep8-naming
+    "N"
+]
+fixable = ["ALL"]
+show-fixes = true
+include = ["*.py"]
+exclude = [
+    ".git",
+    ".idea",
+    ".venv",
+    "venv",
+    ".mypy_cache",
+    ".ruff_cache",
+    ".pytest_cache",
+    ".pytype",
+    "__pypackages__",
+    "_build",
+    "build",
+]
