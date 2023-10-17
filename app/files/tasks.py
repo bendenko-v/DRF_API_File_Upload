@@ -3,11 +3,6 @@ from files.models import File
 
 
 @shared_task
-def process_uploaded_file(file_id):
-    """ Celery task to process uploaded file """
-    try:
-        file_instance = File.objects.get(id=file_id)
-        file_instance.processed = True
-        file_instance.save()
-    except File.DoesNotExist:
-        pass
+def process_uploaded_file() -> None:
+    """ Celery task to process uploaded files """
+    File.objects.filter(processed=False).update(processed=True)

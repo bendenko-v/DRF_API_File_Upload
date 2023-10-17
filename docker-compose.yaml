@@ -24,7 +24,7 @@ services:
       dockerfile: Dockerfile
     container_name: files_celery
     env_file: .env
-    command: celery -A files_api.celery worker -l INFO
+    command: celery -A files_api.celery worker --beat -l INFO
     depends_on:
       - redis
       - django

@@ -1,6 +1,5 @@
 from files.models import File
 from files.serializers import FileSerializer
-from files_api.celery import app as celery_app
 from rest_framework import status, viewsets
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
@@ -19,7 +18,6 @@ class UploadView(APIView):
     def post(self, request, *args, **kwargs):
         try:
             file_instance = File.objects.create(file=request.FILES['file'])
-            celery_app.send_task('files.tasks.process_uploaded_file', args=[file_instance.id])
             serializer = FileSerializer(file_instance)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         except Exception as e:
